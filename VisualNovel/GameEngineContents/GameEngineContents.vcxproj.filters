@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="PreCompile.h" />
+    <ClInclude Include="ContentsCore.h" />
+    <ClInclude Include="ContentsEnum.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="JsonLoader.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\json\inc\json.hpp">
+      <Filter>ThirdParty\json\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\json\inc\json_fwd.hpp">
+      <Filter>ThirdParty\json\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ContentsCore.cpp" />
+    <ClCompile Include="PreCompile.cpp" />
+    <ClCompile Include="JsonLoader.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{dfaa5030-45e1-4f41-83d4-3d4359e25a46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level">
+      <UniqueIdentifier>{39ef70cb-ba8e-4535-a7e9-9ab07c3f7dda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{7c8ebcee-870d-45b9-8acd-4a2c36871a8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{3923db14-83ce-450a-8a62-3ee46ccaff6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\json">
+      <UniqueIdentifier>{ef4fc445-75da-443f-8ad5-8e2cdbd42162}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\json\inc">
+      <UniqueIdentifier>{eb79f437-924d-452f-b34a-85d390a8a646}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

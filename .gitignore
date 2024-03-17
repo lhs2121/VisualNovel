@@ -396,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/DirectX2D/GameEngineContents/ThirdParty/sql/lib/libcrypto-3-x64.dll
+/DirectX2D/GameEngineContents/ThirdParty/sql/lib/libssl-3-x64.dll
+/DirectX2D/GameEngineContents/ThirdParty/sql/lib/mysqlcppconn-9-vs14.dll
+/DirectX2D/GameEngineContents/ThirdParty/sql/lib/mysqlcppconn.lib
+/DirectX2D/GameEngineContents/ThirdParty/sql/lib/mysqlcppconn8-2-vs14.dll
+/DirectX2D/GameEngineContents/ThirdParty/sql/lib/mysqlcppconn-9-vs14.dll

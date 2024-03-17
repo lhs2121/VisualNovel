@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <FxCompile Include="ColorShader.fx" />
+    <FxCompile Include="Transform.fx">
+      <Filter>Header</Filter>
+    </FxCompile>
+    <FxCompile Include="RenderBase.fx">
+      <Filter>Header</Filter>
+    </FxCompile>
+    <FxCompile Include="FadePostEffect.fx">
+      <Filter>Effect</Filter>
+    </FxCompile>
+    <FxCompile Include="DebugColorShader.fx">
+      <Filter>Debug</Filter>
+    </FxCompile>
+    <FxCompile Include="DebugLineShader.fx">
+      <Filter>Debug</Filter>
+    </FxCompile>
+    <FxCompile Include="TargetMerge.fx">
+      <Filter>Target</Filter>
+    </FxCompile>
+    <FxCompile Include="TextureShader.fx">
+      <Filter>2D</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header">
+      <UniqueIdentifier>{d4a38b60-e392-47ca-842d-99ac99c78bf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{7987ef92-8226-4bb4-acde-9a94f4518a6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effect">
+      <UniqueIdentifier>{7d55f5ed-cc37-4df9-af0b-0b5110b4f4d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Target">
+      <UniqueIdentifier>{f0dccba2-dca5-432e-8c54-923daccb7fb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D">
+      <UniqueIdentifier>{5cac7c35-030b-4768-8dec-03154025c829}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
