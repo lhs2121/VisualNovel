@@ -22,6 +22,7 @@ void ContentsCore::Start()
 	//GameEngineGUI::CreateGUIWindow<gui>("gui");
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
 	GameEngineCore::ChangeLevel("TitleLevel");
+	//¾È³ç
 }
 
 void ContentsCore::Update(float _Delta)
