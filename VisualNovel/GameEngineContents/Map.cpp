@@ -13,6 +13,7 @@ void Map::Start()
 {
 	{
 		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("Assets");
 		Dir.MoveChild("Assets\\Map\\City\\001\\Back");
 
 		GameEngineSprite::CreateFolder("TestBack", Dir.GetStringPath());
@@ -20,6 +21,7 @@ void Map::Start()
 
 	{
 		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("Assets");
 		Dir.MoveChild("Assets\\Map\\City\\001\\Obj");
 
 		GameEngineSprite::CreateFolder("TestObj", Dir.GetStringPath());
