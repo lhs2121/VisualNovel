@@ -19,14 +19,22 @@ void Map::Start()
 		GameEngineSprite::CreateFolder("TestBack", Dir.GetStringPath());
 	}
 
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("Assets");
+		Dir.MoveChild("Assets\\Map\\City\\001\\Platform");
+
+		GameEngineSprite::CreateFolder("TestObj", Dir.GetStringPath());
+	}
+
 	BackRenderer = CreateComponent<GameEngineSpriteRenderer>();
-	BackRenderer->SetSprite("TestBack", 0);
+	BackRenderer->SetSprite("TestBack");
 	BackRenderer->SetSampler("POINT");
 	BackRenderer->SetRenderOrder(0);
 	BackRenderer->Transform.SetLocalPosition({ 0,0,250 });
 
 	ObjRenderer = CreateComponent<GameEngineSpriteRenderer>();
-	ObjRenderer->SetSprite("TestBack", 1);
+	ObjRenderer->SetSprite("TestObj");
 	ObjRenderer->SetSampler("POINT");
 	ObjRenderer->SetRenderOrder(1);
 }
