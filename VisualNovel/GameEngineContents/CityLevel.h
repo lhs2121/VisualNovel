@@ -19,5 +19,7 @@ protected:
 	void Start() override;
 	void Update(float _Delta) override;
 
+	float CameraSpeed = 350.0f;
 	std::shared_ptr<class Map> LevelMap;
+	std::shared_ptr<GameEngineCamera> MainCamera;
 };
