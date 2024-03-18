@@ -7,6 +7,8 @@
 #include <GameEngineCore/GameEngineMaterial.h>
 
 #include "TitleLevel.h"
+#include "CityLevel.h"
+
 ContentsCore::ContentsCore() 
 {
 }
@@ -21,7 +23,8 @@ void ContentsCore::Start()
     GameEngineRenderTarget::IsDepth = false;
 	//GameEngineGUI::CreateGUIWindow<gui>("gui");
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
-	GameEngineCore::ChangeLevel("TitleLevel");
+	GameEngineCore::CreateLevel<CityLevel>("CityLevel");
+	GameEngineCore::ChangeLevel("CityLevel");
 	//¾È³ç
 }
 

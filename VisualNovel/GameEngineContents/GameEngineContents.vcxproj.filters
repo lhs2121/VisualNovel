@@ -18,6 +18,12 @@
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Actor\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="CityLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -26,6 +32,12 @@
       <Filter>Global</Filter>
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Actor\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="CityLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,6 +59,9 @@
     </Filter>
     <Filter Include="ThirdParty\json\inc">
       <UniqueIdentifier>{eb79f437-924d-452f-b34a-85d390a8a646}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Map">
+      <UniqueIdentifier>{5556e58e-c823-44c6-9790-74f050d020f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -179,7 +179,15 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CityLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ContentsEnum.h" />
+    <ClInclude Include="Map.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ThirdParty\json\inc\json.hpp" />
     <ClInclude Include="ThirdParty\json\inc\json_fwd.hpp" />
     <ClInclude Include="ContentsCore.h" />
@@ -191,8 +199,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CityLevel.cpp" />
     <ClCompile Include="JsonLoader.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
