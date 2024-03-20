@@ -16,7 +16,7 @@ void CityLevel::Start()
 
 	MainCamera = GetMainCamera();
 	MainCamera->SetProjectionType(EPROJECTIONTYPE::Perspective);
-	MainCamera->Transform.SetLocalPosition({ 0,0,-500 });
+	MainCamera->Transform.SetLocalPosition({ 0,0,-630 });
 
 	GameEngineInput::AddInputObject(this);
 }
