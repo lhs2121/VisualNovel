@@ -56,10 +56,10 @@ void Map::Start()
 	}
 
 	{
-		std::shared_ptr<ContentsTileMapRenderer> TileMap = CreateComponent<ContentsTileMapRenderer>();
+		TileMap = CreateComponent<ContentsTileMapRenderer>();
 		TileMap->CreateTileMap({ 100,100,{32,32},"Tile" });
 		TileMap->SetRenderOrder(2);
-		TileMap->SetOverlayTexture("Test4.png");
+		TileMap->SetOverlayTexture("Test6.png");
 		LoadTileMapFromCSV(TileMap);
 	}
 
@@ -119,25 +119,31 @@ void Map::Update(float _Delta)
 	{
 		ObjRenderer->OverlayInfoValue.Intensity += _Delta;
 		BackRenderer->OverlayInfoValue.Intensity += _Delta;
+		TileMap->OverlayInfoValue.Intensity += _Delta;
 	}
 	if (InputIsPress(VK_DOWN))
 	{
 		ObjRenderer->OverlayInfoValue.Intensity -= _Delta;
 		BackRenderer->OverlayInfoValue.Intensity -= _Delta;
+		TileMap->OverlayInfoValue.Intensity -= _Delta;
 		if (ObjRenderer->OverlayInfoValue.Intensity <= 0.0f)
 		{
 			ObjRenderer->OverlayInfoValue.Intensity = 0.0f;
 			BackRenderer->OverlayInfoValue.Intensity = 0.0f;
+			TileMap->OverlayInfoValue.Intensity = 0.0f;
 		}
 	}
 	if (InputIsPress(VK_LEFT))
 	{
 		ObjRenderer->OverlayInfoValue.OverlayUVPlus.X += _Delta;
 		BackRenderer->OverlayInfoValue.OverlayUVPlus.X += _Delta;
+		TileMap->OverlayInfoValue.OverlayUVPlus.X += _Delta;
+
 	}
 	if (InputIsPress(VK_RIGHT))
 	{
 		ObjRenderer->OverlayInfoValue.OverlayUVPlus.X -= _Delta;
 		BackRenderer->OverlayInfoValue.OverlayUVPlus.X -= _Delta;
+		TileMap->OverlayInfoValue.OverlayUVPlus.X -= _Delta;
 	}
 }
