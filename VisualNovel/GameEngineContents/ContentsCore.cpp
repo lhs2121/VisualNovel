@@ -20,7 +20,7 @@ ContentsCore::~ContentsCore()
 void ContentsCore::Start()
 {
 	GameEngineLevel::OffDebug();
-    GameEngineRenderTarget::IsDepth = false;
+   // GameEngineRenderTarget::IsDepth = false;
 	//GameEngineGUI::CreateGUIWindow<gui>("gui");
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
 	GameEngineCore::CreateLevel<CityLevel>("CityLevel");

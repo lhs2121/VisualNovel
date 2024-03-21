@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "CityLevel.h"
 #include "Map.h"
+#include <GameEngineCore\FadePostEffect.h>
 
 CityLevel::CityLevel()
 {
@@ -17,8 +18,12 @@ void CityLevel::Start()
 	MainCamera = GetMainCamera();
 	MainCamera->SetProjectionType(EPROJECTIONTYPE::Perspective);
 	MainCamera->Transform.SetLocalPosition({ 0,0,-630 });
+	
+	std::shared_ptr<FadePostEffect> eff = GetLevelRenderTarget()->CreateEffect<FadePostEffect>();
+	GameEngineCore::GetBackBufferRenderTarget()->SetClearColor({ 1, 0.078, 0.576 });
 
 	GameEngineInput::AddInputObject(this);
+	
 }
 
 void CityLevel::Update(float _Delta)

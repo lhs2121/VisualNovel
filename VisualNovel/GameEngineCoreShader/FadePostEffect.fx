@@ -27,33 +27,20 @@ SamplerState DiffuseTexSampler : register(s0);
 
 float4 FadePostEffect_PS(PixelOutPut _Input) : SV_Target0
 {
-    // return float4(1.0f, 0.0f, 0.0f, 1.0f);
-    
     float4 Color = DiffuseTex.Sample(DiffuseTexSampler, _Input.TEXCOORD.xy);
     
-    Color.w = 1.0f;
-    
-    Color.xyz -= AccDeltaTime;
-    
-    if (Color.r >= 1.0f)
+    static bool FirstCall = false;
+    if (FirstCall == false)
     {
-        Color.r = 1.0f;
+        FirstCall = true;
+        Color.a = 0.0f;
     }
     
-    if (Color.g >= 1.0f)
-    {
-        Color.g = 1.0f;
-    }
-    
-    if (Color.b >= 1.0f)
-    {
-        Color.b = 1.0f;
-    }
+    Color.a += AccDeltaTime * 0.7f;
     
     if (Color.a >= 1.0f)
     {
         Color.a = 1.0f;
     }
-    
     return Color;
 }
