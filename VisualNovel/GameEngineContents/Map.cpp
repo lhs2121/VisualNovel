@@ -57,6 +57,7 @@ void Map::Start()
 		ObjRenderer->SwitchOverlay("Test2.png");
 		ObjRenderer->SetSprite("TestObj");
 		ObjRenderer->SwitchFlickerEffect();
+		ObjRenderer->SetFlickerInfo(5, 1, 5.0f);
 	}
 
 	{
@@ -66,7 +67,8 @@ void Map::Start()
 		LoadTileMapFromCSV(TileMapRenderer);
 
 		TileMapRenderer->SwitchOverlay("Test7.png");
-		//TileMapRenderer->SwitchFlickerEffect();
+		TileMapRenderer->SwitchFlickerEffect();
+		TileMapRenderer->SetFlickerInfo(7, 1, 3.5f);
 	}
 
 	GameEngineInput::AddInputObject(this);
