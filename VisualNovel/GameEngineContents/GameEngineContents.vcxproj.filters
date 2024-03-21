@@ -24,6 +24,9 @@
     <ClInclude Include="CityLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="ContentsSpriteRenderer.h">
+      <Filter>s</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -39,6 +42,9 @@
     </ClCompile>
     <ClCompile Include="CityLevel.cpp">
       <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsSpriteRenderer.cpp">
+      <Filter>s</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +68,9 @@
     </Filter>
     <Filter Include="Actor\Map">
       <UniqueIdentifier>{5556e58e-c823-44c6-9790-74f050d020f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="s">
+      <UniqueIdentifier>{efce24de-9fc1-471f-9066-d2bf3aaadccd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -19,8 +19,8 @@ void CityLevel::Start()
 	MainCamera->SetProjectionType(EPROJECTIONTYPE::Perspective);
 	MainCamera->Transform.SetLocalPosition({ 0,0,-630 });
 	
-	std::shared_ptr<FadePostEffect> eff = GetLevelRenderTarget()->CreateEffect<FadePostEffect>();
-	GameEngineCore::GetBackBufferRenderTarget()->SetClearColor({ 1, 0.078, 0.576 });
+	GetLevelRenderTarget()->CreateEffect<FadePostEffect>();
+    GameEngineCore::GetBackBufferRenderTarget()->SetClearColor({ 1, 0.078, 0.576 });
 
 	GameEngineInput::AddInputObject(this);
 	

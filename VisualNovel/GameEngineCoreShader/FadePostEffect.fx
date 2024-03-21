@@ -44,3 +44,4 @@ float4 FadePostEffect_PS(PixelOutPut _Input) : SV_Target0
     }
     return Color;
 }
+

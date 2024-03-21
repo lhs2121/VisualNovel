@@ -1,6 +1,8 @@
 #include "PreCompile.h"
 #include "Map.h"
+#include "ContentsSpriteRenderer.h"
 #include <fstream>
+#include <GameEngineCore\GameEngineBlend.h>
 
 Map::Map()
 {
@@ -23,6 +25,14 @@ void Map::Start()
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistsChild("Assets");
+		Dir.MoveChild("Assets\\Map\\City\\001\\Platform");
+
+		GameEngineSprite::CreateFolder("TestObj", Dir.GetStringPath());
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("Assets");
 		Dir.MoveChild("Assets\\Map\\City\\001\\Tile");
 
 		std::shared_ptr<GameEngineSprite> TileSet = GameEngineSprite::CreateFolder("Tile", Dir.GetStringPath());
@@ -32,19 +42,27 @@ void Map::Start()
 		std::shared_ptr<GameEngineTileMap> TileMap = CreateComponent<GameEngineTileMap>();
 		TileMap->CreateTileMap({ 100,100,{32,32},"Tile" });
 		TileMap->SetRenderOrder(3);
+
 		LoadTileMapFromCSV(TileMap);
 	}
 
-	BackRenderer = CreateComponent<GameEngineSpriteRenderer>();
-	BackRenderer->SetSprite("TestBack");
-	BackRenderer->SetSampler("POINT");
-	BackRenderer->SetRenderOrder(0);
-	BackRenderer->Transform.SetLocalPosition({ 0,0,250 });
+	{
+		BackRenderer = CreateComponent<ContentsSpriteRenderer>();
+		BackRenderer->SetSprite("TestBack");
+		BackRenderer->SetOverlayTexture("Test3.png");
+		BackRenderer->SetRenderOrder(0);
+		BackRenderer->Transform.SetLocalPosition({ 0,0,250 });
+	}
 
-	//ObjRenderer = CreateComponent<GameEngineSpriteRenderer>();
-	//ObjRenderer->SetSprite("TestObj");
-	//ObjRenderer->SetSampler("POINT");
-	//ObjRenderer->SetRenderOrder(1);
+	{
+		ObjRenderer = CreateComponent<ContentsSpriteRenderer>();
+		ObjRenderer->SetSprite("TestObj");
+		ObjRenderer->SetOverlayTexture("Test2.png");
+		ObjRenderer->SetRenderOrder(1);
+		ObjRenderer->Transform.SetLocalPosition({ 0,100,150 });
+	}
+	
+	GameEngineInput::AddInputObject(this);
 }
 
 void Map::LoadTileMapFromCSV(std::shared_ptr<GameEngineTileMap> tileMap)
@@ -96,4 +114,29 @@ void Map::LoadTileMapFromCSV(std::shared_ptr<GameEngineTileMap> tileMap)
 
 void Map::Update(float _Delta)
 {
+	if (InputIsPress(VK_UP))
+	{
+		ObjRenderer->OverlayInfoValue.Intensity += _Delta;
+		BackRenderer->OverlayInfoValue.Intensity += _Delta;
+	}
+	if (InputIsPress(VK_DOWN))
+	{
+		ObjRenderer->OverlayInfoValue.Intensity -= _Delta;
+		BackRenderer->OverlayInfoValue.Intensity -= _Delta;
+		if (ObjRenderer->OverlayInfoValue.Intensity <= 0.0f)
+		{
+			ObjRenderer->OverlayInfoValue.Intensity = 0.0f;
+			BackRenderer->OverlayInfoValue.Intensity = 0.0f;
+		}
+	}
+	if (InputIsPress(VK_LEFT))
+	{
+		ObjRenderer->OverlayInfoValue.OverlayUVPlus.X += _Delta;
+		BackRenderer->OverlayInfoValue.OverlayUVPlus.X += _Delta;
+	}
+	if (InputIsPress(VK_RIGHT))
+	{
+		ObjRenderer->OverlayInfoValue.OverlayUVPlus.X -= _Delta;
+		BackRenderer->OverlayInfoValue.OverlayUVPlus.X -= _Delta;
+	}
 }

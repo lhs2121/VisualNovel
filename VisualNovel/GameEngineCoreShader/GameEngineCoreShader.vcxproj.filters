@@ -41,4 +41,9 @@
       <UniqueIdentifier>{5cac7c35-030b-4768-8dec-03154025c829}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ContentsShader.fx">
+      <Filter>2D</Filter>
+    </None>
+  </ItemGroup>
 </Project>
