@@ -19,7 +19,22 @@ void ContentsSpriteRenderer::Render(GameEngineCamera* _Camera, float _Delta)
 	GameEngineSpriteRenderer::Render(_Camera, _Delta);
 }
 
-void ContentsSpriteRenderer::SwitchOverlay(std::string _TextureName)
+void ContentsSpriteRenderer::EnableOverlay()
+{
+	if (OverlayTexture == nullptr)
+	{
+		OverlayTexture = GameEngineTexture::Find("NSet.png");
+	}
+
+	GameEngineSpriteRenderer::SetMaterial("ContentsMaterial");
+	GetShaderResHelper().SetTexture("OverlayTex", OverlayTexture);
+	GetShaderResHelper().SetSampler("OverlayTexSampler", "EngineBaseWRAPSampler");
+	GetShaderResHelper().SetConstantBufferLink("OverlayInfo", OverlayInfoValue);
+
+	IsOverlay = true;
+}
+
+void ContentsSpriteRenderer::EnableOverlay(std::string _TextureName)
 {
 	if (nullptr == GameEngineTexture::Find(_TextureName))
 	{
@@ -30,27 +45,57 @@ void ContentsSpriteRenderer::SwitchOverlay(std::string _TextureName)
 	}
 	else
 	{
-		OverlayTexture = GameEngineTexture::Find(_TextureName);
+		if (OverlayTexture == nullptr)
+		{
+			OverlayTexture = GameEngineTexture::Find(_TextureName);
+		}
 	}
-
 
 	GameEngineSpriteRenderer::SetMaterial("ContentsMaterial");
 	GetShaderResHelper().SetTexture("OverlayTex", OverlayTexture);
 	GetShaderResHelper().SetSampler("OverlayTexSampler", "EngineBaseWRAPSampler");
 	GetShaderResHelper().SetConstantBufferLink("OverlayInfo", OverlayInfoValue);
+
+	IsOverlay = true;
 }
 
-void ContentsSpriteRenderer::SwitchFlickerEffect()
+void ContentsSpriteRenderer::DisableOverlay()
 {
-	IsFlicker = !IsFlicker;
+	GameEngineRenderer::SetMaterial("2DTexture");
+
+	IsOverlay = false;
 }
 
-void ContentsSpriteRenderer::SetOverlayInfo(OverlayInfo _Info)
+void ContentsSpriteRenderer::EnableFlicker()
 {
-	OverlayInfoValue = _Info;
+	IsFlicker = true;
 }
 
-void ContentsSpriteRenderer::SetFlickerInfo(float _Max, float _Min, float _Speed)
+void ContentsSpriteRenderer::DisableFlicker()
+{
+	OverlayInfoValue.Intensity = 1.0f;
+	IsFlicker = false;
+}
+
+void ContentsSpriteRenderer::EnableTextureScrolling(float4 _Vector)
+{
+	ScrollingVector = { -_Vector.X, _Vector.Y };
+	IsScrolling = true;
+}
+
+void ContentsSpriteRenderer::DisableTextureScrolling()
+{
+	OverlayInfoValue.OverlayUVPlus = float4::ZERO;
+	OverlayInfoValue.OverlayUVMul = float4::ONE;
+	IsScrolling = false;
+}
+
+void ContentsSpriteRenderer::SetOverlay(float Intensity, float4 OverlayUVPlus, float4 OverlayUVMul)
+{
+	OverlayInfoValue = { Intensity ,OverlayUVPlus,OverlayUVMul };
+}
+
+void ContentsSpriteRenderer::SetFlicker(float _Max, float _Min, float _Speed)
 {
 	MaxIntensity = _Max;
 	MinIntensity = _Min;
@@ -61,22 +106,31 @@ void ContentsSpriteRenderer::Update(float _Delta)
 {
 	GameEngineSpriteRenderer::Update(_Delta);
 
-	if (IsFlicker == false)
+	if (IsOverlay == false)
 	{
 		return;
 	}
 
-	float Intensity = OverlayInfoValue.Intensity;
-	if (Intensity > MaxIntensity)
+	if (IsFlicker == true)
 	{
-		OverlayInfoValue.Intensity = MaxIntensity;
-		IntensitySpeed *= -1;
+		float Intensity = OverlayInfoValue.Intensity;
+		if (Intensity > MaxIntensity)
+		{
+			OverlayInfoValue.Intensity = MaxIntensity;
+			IntensitySpeed *= -1;
+		}
+		else if (Intensity < MinIntensity)
+		{
+			OverlayInfoValue.Intensity = MinIntensity;
+			IntensitySpeed *= -1;
+		}
+		OverlayInfoValue.Intensity += IntensitySpeed * _Delta;
 	}
-	else if (Intensity < MinIntensity)
+
+	if (IsScrolling == true)
 	{
-		OverlayInfoValue.Intensity = MinIntensity;
-		IntensitySpeed *= -1;
+		OverlayInfoValue.OverlayUVPlus += ScrollingVector * _Delta;
 	}
-	OverlayInfoValue.Intensity += IntensitySpeed * _Delta;
+
 
 }

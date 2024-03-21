@@ -44,20 +44,21 @@ void Map::Start()
 		BackRenderer->SetRenderOrder(0);
 		BackRenderer->Transform.SetLocalPosition({ 0,0,350 });
 
-		BackRenderer->SwitchOverlay("Test2.png");
 		BackRenderer->SetSprite("TestBack");
-		BackRenderer->SwitchFlickerEffect();
+		BackRenderer->EnableOverlay("Test2.png");
+		BackRenderer->EnableFlicker();
+		BackRenderer->SetFlicker(7, 0.5f, 10.0f);
 	}
 
-	{
+	/*{
 		ObjRenderer = CreateComponent<ContentsSpriteRenderer>();
 		ObjRenderer->SetRenderOrder(1);
 		ObjRenderer->Transform.SetLocalPosition({ 0,100,150 });
 
-		ObjRenderer->SwitchOverlay("Test2.png");
 		ObjRenderer->SetSprite("TestObj");
-		ObjRenderer->SwitchFlickerEffect();
-		ObjRenderer->SetFlickerInfo(5, 1, 5.0f);
+		ObjRenderer->EnableOverlay("Test2.png");
+		ObjRenderer->EnableFlicker();
+		ObjRenderer->SetFlicker(5, 1, 5.0f);
 	}
 
 	{
@@ -66,15 +67,15 @@ void Map::Start()
 		TileMapRenderer->SetRenderOrder(2);
 		LoadTileMapFromCSV(TileMapRenderer);
 
-		TileMapRenderer->SwitchOverlay("Test7.png");
-		TileMapRenderer->SwitchFlickerEffect();
-		TileMapRenderer->SetFlickerInfo(7, 1, 3.5f);
-	}
+		TileMapRenderer->EnableOverlay("Test7.png");
+		TileMapRenderer->EnableFlicker();
+		TileMapRenderer->SetFlicker(7, 1, 3.5f);
+	}*/
 
 	GameEngineInput::AddInputObject(this);
 }
 
-void Map::LoadTileMapFromCSV(std::shared_ptr<ContentsTileMapRenderer> TileMap)
+void Map::LoadTileMapFromCSV(std::shared_ptr<ContentsTileMapRenderer> TileMapRenderer)
 {
 	GameEngineDirectory Dir;
 	Dir.MoveParentToExistsChild("Assets");
@@ -111,7 +112,7 @@ void Map::LoadTileMapFromCSV(std::shared_ptr<ContentsTileMapRenderer> TileMap)
 				int index = std::stoi(line.substr(pos + 1));
 
 
-				TileMap->SetTileIndex({ (ULONG)x, (ULONG)y, (UINT)index, spriteName });
+				TileMapRenderer->SetTileIndex({ (ULONG)x, (ULONG)y, (UINT)index, spriteName });
 			}
 			++x;
 		}
@@ -123,4 +124,28 @@ void Map::LoadTileMapFromCSV(std::shared_ptr<ContentsTileMapRenderer> TileMap)
 
 void Map::Update(float _Delta)
 {
+	if (InputIsDown('K'))
+	{
+		BackRenderer->DisableOverlay();
+	}
+	if (InputIsDown('L'))
+	{
+		BackRenderer->EnableOverlay();
+	}
+	if (InputIsDown('H'))
+	{
+		BackRenderer->EnableFlicker();
+	}
+	if (InputIsDown('J'))
+	{
+		BackRenderer->DisableFlicker();
+	}
+	if (InputIsPress('B'))
+	{
+		BackRenderer->EnableTextureScrolling({1,-2});
+	}
+	if (InputIsDown('N'))
+	{
+		BackRenderer->DisableTextureScrolling();
+	}
 }

@@ -2,6 +2,8 @@
 #include <GameEngineCore/GameEngineActor.h>
 
 // Ό³Έν :
+class ContentsTileMapRenderer;
+class ContentsSpriteRenderer;
 class Map : public GameEngineActor
 {
 public:
@@ -18,9 +20,9 @@ public:
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
-	void LoadTileMapFromCSV(std::shared_ptr<class ContentsTileMapRenderer> TileMap);
+	void LoadTileMapFromCSV(std::shared_ptr<ContentsTileMapRenderer> TileMapRenderer);
 
 	std::shared_ptr<ContentsTileMapRenderer> TileMapRenderer;
-	std::shared_ptr<class ContentsSpriteRenderer> BackRenderer;
-	std::shared_ptr<class ContentsSpriteRenderer> ObjRenderer;
+	std::shared_ptr<ContentsSpriteRenderer> BackRenderer;
+	std::shared_ptr<ContentsSpriteRenderer> ObjRenderer;
 };
