@@ -1,13 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 
-struct OverlayInfo
-{
-	float Intensity = 1.0f;
-	float4 OverlayUVPlus = float4::ZERO;
-	float4 OverlayUVMul = float4::ONE;
-};
-
 // Ό³Έν :
 class ContentsSpriteRenderer : public GameEngineSpriteRenderer
 {
@@ -23,8 +16,6 @@ public:
 	ContentsSpriteRenderer& operator=(ContentsSpriteRenderer&& _Other) noexcept = delete;
 
 	void SetOverlayTexture(std::string _FileName);
-	void SetOverlayInfo(float Intensity, float4 OverlayUVPlus, float4 OverlayUVMul);
-
 	OverlayInfo OverlayInfoValue;
 protected:
 	void Start() override;

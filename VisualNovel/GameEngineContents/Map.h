@@ -18,7 +18,7 @@ public:
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
-	void LoadTileMapFromCSV(std::shared_ptr<GameEngineTileMap> tileMap);
+	void LoadTileMapFromCSV(std::shared_ptr<class ContentsTileMapRenderer> TileMap);
 
 	std::shared_ptr<class ContentsSpriteRenderer> BackRenderer;
 	std::shared_ptr<class ContentsSpriteRenderer> ObjRenderer;

@@ -1,30 +1,15 @@
 #include "PreCompile.h"
-#include "ContentsSpriteRenderer.h"
+#include "ContentsTileMapRenderer.h"
 
-ContentsSpriteRenderer::ContentsSpriteRenderer()
+ContentsTileMapRenderer::ContentsTileMapRenderer()
 {
 }
 
-ContentsSpriteRenderer::~ContentsSpriteRenderer()
+ContentsTileMapRenderer::~ContentsTileMapRenderer()
 {
 }
 
-void ContentsSpriteRenderer::Start()
-{
-	GameEngineSpriteRenderer::Start();
-}
-
-void ContentsSpriteRenderer::Update(float _Delta)
-{
-	GameEngineSpriteRenderer::Update(_Delta);
-}
-
-void ContentsSpriteRenderer::Render(GameEngineCamera* _Camera, float _Delta)
-{
-	GameEngineSpriteRenderer::Render(_Camera, _Delta);
-}
-
-void ContentsSpriteRenderer::SetOverlayTexture(std::string _FileName)
+void ContentsTileMapRenderer::SetOverlayTexture(std::string _FileName)
 {
 	if (nullptr == GameEngineTexture::Find(_FileName))
 	{
@@ -38,9 +23,9 @@ void ContentsSpriteRenderer::SetOverlayTexture(std::string _FileName)
 		OverlayTexture = GameEngineTexture::Find(_FileName);
 	}
 
-
 	GameEngineSpriteRenderer::SetMaterial("ContentsMaterial");
 	GetShaderResHelper().SetTexture("OverlayTex", OverlayTexture);
 	GetShaderResHelper().SetSampler("OverlayTexSampler", "EngineBaseWRAPSampler");
 	GetShaderResHelper().SetConstantBufferLink("OverlayInfo", OverlayInfoValue);
 }
+

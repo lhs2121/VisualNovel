@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Map.h"
 #include "ContentsSpriteRenderer.h"
+#include "ContentsTileMapRenderer.h"
 #include <fstream>
 #include <GameEngineCore\GameEngineBlend.h>
 
@@ -39,33 +40,33 @@ void Map::Start()
 	}
 
 	{
-		std::shared_ptr<GameEngineTileMap> TileMap = CreateComponent<GameEngineTileMap>();
-		TileMap->CreateTileMap({ 100,100,{32,32},"Tile" });
-		TileMap->SetRenderOrder(3);
-
-		LoadTileMapFromCSV(TileMap);
-	}
-
-	{
 		BackRenderer = CreateComponent<ContentsSpriteRenderer>();
-		BackRenderer->SetSprite("TestBack");
 		BackRenderer->SetOverlayTexture("Test3.png");
+		BackRenderer->SetSprite("TestBack");
 		BackRenderer->SetRenderOrder(0);
-		BackRenderer->Transform.SetLocalPosition({ 0,0,250 });
+		BackRenderer->Transform.SetLocalPosition({ 0,0,350 });
 	}
 
 	{
 		ObjRenderer = CreateComponent<ContentsSpriteRenderer>();
-		ObjRenderer->SetSprite("TestObj");
 		ObjRenderer->SetOverlayTexture("Test2.png");
+		ObjRenderer->SetSprite("TestObj");
 		ObjRenderer->SetRenderOrder(1);
 		ObjRenderer->Transform.SetLocalPosition({ 0,100,150 });
 	}
-	
+
+	{
+		std::shared_ptr<ContentsTileMapRenderer> TileMap = CreateComponent<ContentsTileMapRenderer>();
+		TileMap->CreateTileMap({ 100,100,{32,32},"Tile" });
+		TileMap->SetRenderOrder(2);
+		TileMap->SetOverlayTexture("Test4.png");
+		LoadTileMapFromCSV(TileMap);
+	}
+
 	GameEngineInput::AddInputObject(this);
 }
 
-void Map::LoadTileMapFromCSV(std::shared_ptr<GameEngineTileMap> tileMap)
+void Map::LoadTileMapFromCSV(std::shared_ptr<ContentsTileMapRenderer> TileMap)
 {
 	GameEngineDirectory Dir;
 	Dir.MoveParentToExistsChild("Assets");
@@ -102,7 +103,7 @@ void Map::LoadTileMapFromCSV(std::shared_ptr<GameEngineTileMap> tileMap)
 				int index = std::stoi(line.substr(pos + 1));
 
 
-				tileMap->SetTileIndex({ (ULONG)x, (ULONG)y, (UINT)index, spriteName });
+				TileMap->SetTileIndex({ (ULONG)x, (ULONG)y, (UINT)index, spriteName });
 			}
 			++x;
 		}
