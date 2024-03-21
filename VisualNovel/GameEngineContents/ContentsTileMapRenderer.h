@@ -16,7 +16,7 @@ public:
 	ContentsTileMapRenderer& operator=(const ContentsTileMapRenderer& _Other) = delete;
 	ContentsTileMapRenderer& operator=(ContentsTileMapRenderer&& _Other) noexcept = delete;
 
-	void SetOverlayTexture(std::string _FileName);
+	void SwitchOverlay(std::string _FileName);
 	OverlayInfo OverlayInfoValue;
 protected:
 	std::shared_ptr<class GameEngineTexture> OverlayTexture;

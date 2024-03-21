@@ -41,26 +41,32 @@ void Map::Start()
 
 	{
 		BackRenderer = CreateComponent<ContentsSpriteRenderer>();
-		BackRenderer->SetOverlayTexture("Test3.png");
-		BackRenderer->SetSprite("TestBack");
 		BackRenderer->SetRenderOrder(0);
 		BackRenderer->Transform.SetLocalPosition({ 0,0,350 });
+
+		BackRenderer->SwitchOverlay("Test2.png");
+		BackRenderer->SetSprite("TestBack");
+		BackRenderer->SwitchFlickerEffect();
 	}
 
 	{
 		ObjRenderer = CreateComponent<ContentsSpriteRenderer>();
-		ObjRenderer->SetOverlayTexture("Test2.png");
-		ObjRenderer->SetSprite("TestObj");
 		ObjRenderer->SetRenderOrder(1);
 		ObjRenderer->Transform.SetLocalPosition({ 0,100,150 });
+
+		ObjRenderer->SwitchOverlay("Test2.png");
+		ObjRenderer->SetSprite("TestObj");
+		ObjRenderer->SwitchFlickerEffect();
 	}
 
 	{
-		TileMap = CreateComponent<ContentsTileMapRenderer>();
-		TileMap->CreateTileMap({ 100,100,{32,32},"Tile" });
-		TileMap->SetRenderOrder(2);
-		TileMap->SetOverlayTexture("Test6.png");
-		LoadTileMapFromCSV(TileMap);
+		TileMapRenderer = CreateComponent<ContentsTileMapRenderer>();
+		TileMapRenderer->CreateTileMap({ 100,100,{32,32},"Tile" });
+		TileMapRenderer->SetRenderOrder(2);
+		LoadTileMapFromCSV(TileMapRenderer);
+
+		TileMapRenderer->SwitchOverlay("Test7.png");
+		//TileMapRenderer->SwitchFlickerEffect();
 	}
 
 	GameEngineInput::AddInputObject(this);
@@ -115,35 +121,4 @@ void Map::LoadTileMapFromCSV(std::shared_ptr<ContentsTileMapRenderer> TileMap)
 
 void Map::Update(float _Delta)
 {
-	if (InputIsPress(VK_UP))
-	{
-		ObjRenderer->OverlayInfoValue.Intensity += _Delta;
-		BackRenderer->OverlayInfoValue.Intensity += _Delta;
-		TileMap->OverlayInfoValue.Intensity += _Delta;
-	}
-	if (InputIsPress(VK_DOWN))
-	{
-		ObjRenderer->OverlayInfoValue.Intensity -= _Delta;
-		BackRenderer->OverlayInfoValue.Intensity -= _Delta;
-		TileMap->OverlayInfoValue.Intensity -= _Delta;
-		if (ObjRenderer->OverlayInfoValue.Intensity <= 0.0f)
-		{
-			ObjRenderer->OverlayInfoValue.Intensity = 0.0f;
-			BackRenderer->OverlayInfoValue.Intensity = 0.0f;
-			TileMap->OverlayInfoValue.Intensity = 0.0f;
-		}
-	}
-	if (InputIsPress(VK_LEFT))
-	{
-		ObjRenderer->OverlayInfoValue.OverlayUVPlus.X += _Delta;
-		BackRenderer->OverlayInfoValue.OverlayUVPlus.X += _Delta;
-		TileMap->OverlayInfoValue.OverlayUVPlus.X += _Delta;
-
-	}
-	if (InputIsPress(VK_RIGHT))
-	{
-		ObjRenderer->OverlayInfoValue.OverlayUVPlus.X -= _Delta;
-		BackRenderer->OverlayInfoValue.OverlayUVPlus.X -= _Delta;
-		TileMap->OverlayInfoValue.OverlayUVPlus.X -= _Delta;
-	}
 }

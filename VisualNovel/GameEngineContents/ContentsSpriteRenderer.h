@@ -15,12 +15,21 @@ public:
 	ContentsSpriteRenderer& operator=(const ContentsSpriteRenderer& _Other) = delete;
 	ContentsSpriteRenderer& operator=(ContentsSpriteRenderer&& _Other) noexcept = delete;
 
-	void SetOverlayTexture(std::string _FileName);
+	void SwitchOverlay(std::string _TextureName);
+	void SwitchFlickerEffect();
+
+	void SetOverlayInfo(OverlayInfo _Info);
+	void SetFlickerInfo(float _Max,float _Min,float _Speed);
+
 	OverlayInfo OverlayInfoValue;
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
 	void Render(GameEngineCamera* _Camera, float _Delta) override;
 
+	float MaxIntensity = 4.5f;
+	float MinIntensity = 2.0f;
+	float IntensitySpeed = 0.5f;
+	bool IsFlicker = false;
 	std::shared_ptr<class GameEngineTexture> OverlayTexture;
 };

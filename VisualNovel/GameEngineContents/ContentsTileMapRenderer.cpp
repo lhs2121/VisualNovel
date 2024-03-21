@@ -9,7 +9,7 @@ ContentsTileMapRenderer::~ContentsTileMapRenderer()
 {
 }
 
-void ContentsTileMapRenderer::SetOverlayTexture(std::string _FileName)
+void ContentsTileMapRenderer::SwitchOverlay(std::string _FileName)
 {
 	if (nullptr == GameEngineTexture::Find(_FileName))
 	{

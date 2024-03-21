@@ -20,7 +20,7 @@ protected:
 	void Update(float _Delta) override;
 	void LoadTileMapFromCSV(std::shared_ptr<class ContentsTileMapRenderer> TileMap);
 
-	std::shared_ptr<ContentsTileMapRenderer> TileMap;
+	std::shared_ptr<ContentsTileMapRenderer> TileMapRenderer;
 	std::shared_ptr<class ContentsSpriteRenderer> BackRenderer;
 	std::shared_ptr<class ContentsSpriteRenderer> ObjRenderer;
 };
