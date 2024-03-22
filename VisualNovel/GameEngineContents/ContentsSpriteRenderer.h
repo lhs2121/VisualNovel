@@ -22,19 +22,23 @@ public:
 	void EnableFlicker();
 	void DisableFlicker();
 
-	void EnableTextureScrolling(float4 _Vector);
+	void EnableSpriteScrolling(float4 Dir);
+	void DisableSpriteScrolling();
+
+	void EnableTextureScrolling(float4 Dir);
 	void DisableTextureScrolling();
 
 	void SetOverlay(float Intensity, float4 OverlayUVPlus, float4 OverlayUVMul);
 	void SetFlicker(float _Max, float _Min, float _Speed);
 
-	OverlayInfo OverlayInfoValue;
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
 	void Render(GameEngineCamera* _Camera, float _Delta) override;
 
-	float4 ScrollingVector;
+	OverlayInfo OverlayInfoValue;
+	float4 ShaderScrollingVector;
+	float4 SpriteScrollingVector;
 
 	float MaxIntensity = 4.5f;
 	float MinIntensity = 2.0f;
@@ -43,6 +47,7 @@ protected:
 	bool IsFlicker = false;
 	bool IsOverlay = false;
 	bool IsScrolling = false;
+	bool IsSpriteScrolling = false;	
 
 	std::shared_ptr<class GameEngineTexture> OverlayTexture;
 };

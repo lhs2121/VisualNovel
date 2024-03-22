@@ -53,6 +53,7 @@ void ContentsSpriteRenderer::EnableOverlay(std::string _TextureName)
 
 	GameEngineSpriteRenderer::SetMaterial("ContentsMaterial");
 	GetShaderResHelper().SetTexture("OverlayTex", OverlayTexture);
+	GetShaderResHelper().SetSampler("DiffuseTexSampler", "EngineBaseWRAPSampler");
 	GetShaderResHelper().SetSampler("OverlayTexSampler", "EngineBaseWRAPSampler");
 	GetShaderResHelper().SetConstantBufferLink("OverlayInfo", OverlayInfoValue);
 
@@ -77,9 +78,22 @@ void ContentsSpriteRenderer::DisableFlicker()
 	IsFlicker = false;
 }
 
-void ContentsSpriteRenderer::EnableTextureScrolling(float4 _Vector)
+void ContentsSpriteRenderer::EnableSpriteScrolling(float4 Dir)
 {
-	ScrollingVector = { -_Vector.X, _Vector.Y };
+	SpriteScrollingVector = { -Dir.X,Dir.Y };
+	IsSpriteScrolling = true;
+}
+
+void ContentsSpriteRenderer::DisableSpriteScrolling()
+{
+	RenderBaseInfoValue.VertexUVPlus = float4::ZERO;
+	RenderBaseInfoValue.VertexUVMul = float4::ONE;
+	IsSpriteScrolling = false;
+}
+
+void ContentsSpriteRenderer::EnableTextureScrolling(float4 Dir)
+{
+	ShaderScrollingVector = { -Dir.X, Dir.Y };
 	IsScrolling = true;
 }
 
@@ -106,6 +120,11 @@ void ContentsSpriteRenderer::Update(float _Delta)
 {
 	GameEngineSpriteRenderer::Update(_Delta);
 
+	if (IsSpriteScrolling == true)
+	{
+		RenderBaseInfoValue.VertexUVPlus += SpriteScrollingVector * _Delta;
+	}
+
 	if (IsOverlay == false)
 	{
 		return;
@@ -129,8 +148,6 @@ void ContentsSpriteRenderer::Update(float _Delta)
 
 	if (IsScrolling == true)
 	{
-		OverlayInfoValue.OverlayUVPlus += ScrollingVector * _Delta;
+		OverlayInfoValue.OverlayUVPlus += ShaderScrollingVector * _Delta;
 	}
-
-
 }

@@ -50,7 +50,7 @@ void Map::Start()
 		BackRenderer->SetFlicker(7, 0.5f, 10.0f);
 	}
 
-	/*{
+	{
 		ObjRenderer = CreateComponent<ContentsSpriteRenderer>();
 		ObjRenderer->SetRenderOrder(1);
 		ObjRenderer->Transform.SetLocalPosition({ 0,100,150 });
@@ -70,7 +70,7 @@ void Map::Start()
 		TileMapRenderer->EnableOverlay("Test7.png");
 		TileMapRenderer->EnableFlicker();
 		TileMapRenderer->SetFlicker(7, 1, 3.5f);
-	}*/
+	}
 
 	GameEngineInput::AddInputObject(this);
 }
@@ -147,5 +147,13 @@ void Map::Update(float _Delta)
 	if (InputIsDown('N'))
 	{
 		BackRenderer->DisableTextureScrolling();
+	}
+	if (InputIsPress('Z'))
+	{
+		BackRenderer->EnableSpriteScrolling({ 0.5f,0 });
+	}
+	if (InputIsDown('X'))
+	{
+		BackRenderer->DisableSpriteScrolling();
 	}
 }
