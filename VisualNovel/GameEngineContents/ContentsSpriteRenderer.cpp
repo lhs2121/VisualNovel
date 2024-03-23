@@ -12,6 +12,7 @@ ContentsSpriteRenderer::~ContentsSpriteRenderer()
 void ContentsSpriteRenderer::Start()
 {
 	GameEngineSpriteRenderer::Start();
+	IsUserSampler = false;
 }
 
 void ContentsSpriteRenderer::Render(GameEngineCamera* _Camera, float _Delta)
@@ -63,7 +64,7 @@ void ContentsSpriteRenderer::EnableOverlay(std::string _TextureName)
 void ContentsSpriteRenderer::DisableOverlay()
 {
 	GameEngineRenderer::SetMaterial("2DTexture");
-
+	GetShaderResHelper().SetSampler("DiffuseTexSampler", "EngineBaseWRAPSampler");
 	IsOverlay = false;
 }
 

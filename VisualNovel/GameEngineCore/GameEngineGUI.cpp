@@ -47,16 +47,20 @@ void GameEngineGUI::Start()
     //io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleViewports; // FIXME-DPI: Experimental.
 
     // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
-    //ImGui::StyleColorsLight();
+    //ImGui::StyleColorsDark();
+    ImGui::StyleColorsLight();
 
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
     ImGuiStyle& style = ImGui::GetStyle();
     if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
     {
-        style.WindowRounding = 0.0f;
-        style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+        style.WindowRounding = 5.0f;
+        style.Colors[ImGuiCol_WindowBg] = ImVec4(0.96f, 0.96f, 0.86f, 0.7f);
     }
+
+    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.266f, 0.890f, 1.0f, 0.8f)); // 버튼의 배경색 설정
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.5f, 0.5f, 0.5f, 1.0f)); // 버튼에 마우스 호버 시의 배경색 설정
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.3f, 0.3f, 0.3f, 1.0f)); // 버튼을 클릭하거나 액티브할 때의 배경색 설정
 
     // Setup Platform/Renderer backends
     ImGui_ImplWin32_Init(GameEngineCore::MainWindow.GetHWND());

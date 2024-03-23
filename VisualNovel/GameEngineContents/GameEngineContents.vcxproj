@@ -183,6 +183,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ContensWindow.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="ContentsSpriteRenderer.h">
       <SubType>
@@ -220,6 +224,7 @@
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp" />
     <ClCompile Include="ContentsSpriteRenderer.cpp" />
+    <ClCompile Include="ContensWindow.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

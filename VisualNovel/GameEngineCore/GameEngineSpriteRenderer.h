@@ -243,7 +243,7 @@ protected:
 	int Index = 0;
 	
 
-private:
+protected:
 	// 부모인 actor를 기준으로한
 
 	std::map<std::string, std::shared_ptr<GameEngineFrameAnimation>> FrameAnimations;

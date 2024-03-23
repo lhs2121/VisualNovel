@@ -20,7 +20,7 @@ void CityLevel::Start()
 	MainCamera->Transform.SetLocalPosition({ 0,0,-630 });
 	
 	GetLevelRenderTarget()->CreateEffect<FadePostEffect>();
-    GameEngineCore::GetBackBufferRenderTarget()->SetClearColor({ 1, 0.078, 0.576 });
+    GameEngineCore::GetBackBufferRenderTarget()->SetClearColor({ 1.0f, 0.078f, 0.576f });
 
 	GameEngineInput::AddInputObject(this);
 	

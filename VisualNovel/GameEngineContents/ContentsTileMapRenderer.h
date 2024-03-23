@@ -2,7 +2,6 @@
 #include "ContentsTileMapRenderer.h"
 
 // Ό³Έν :
-class OverlayInfo;
 class ContentsTileMapRenderer : public ContentsSpriteRenderer
 {
 public:

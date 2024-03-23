@@ -25,10 +25,13 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="ContentsTileMapRenderer.h">
-      <Filter>ContentsRenderer</Filter>
+      <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="ContentsSpriteRenderer.h">
-      <Filter>ContentsRenderer</Filter>
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ContensWindow.h">
+      <Filter>GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -47,10 +50,13 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="ContentsSpriteRenderer.cpp">
-      <Filter>ContentsRenderer</Filter>
+      <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="ContentsTileMapRenderer.cpp">
-      <Filter>ContentsRenderer</Filter>
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ContensWindow.cpp">
+      <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,8 +81,11 @@
     <Filter Include="Actor\Map">
       <UniqueIdentifier>{5556e58e-c823-44c6-9790-74f050d020f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ContentsRenderer">
+    <Filter Include="Renderer">
       <UniqueIdentifier>{efce24de-9fc1-471f-9066-d2bf3aaadccd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{01c8b4e5-ada3-4ce0-86f4-0e2375fdc16b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

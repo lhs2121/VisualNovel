@@ -5,7 +5,9 @@
 #include <GameEngineCore/GameEngineBlend.h>
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineMaterial.h>
+#include <GameEngineCore/GameEngineGUI.h>
 
+#include "ContensWindow.h"
 #include "TitleLevel.h"
 #include "CityLevel.h"
 
@@ -43,9 +45,9 @@ void ContentsCore::Start()
 		Mat->SetRasterizer("EngineRasterizer");
 	}
 
+    // GameEngineRenderTarget::IsDepth = false;
 	GameEngineLevel::OffDebug();
-   // GameEngineRenderTarget::IsDepth = false;
-	//GameEngineGUI::CreateGUIWindow<gui>("gui");
+	GameEngineGUI::CreateGUIWindow<ContensWindow>("ContensWindow");
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
 	GameEngineCore::CreateLevel<CityLevel>("CityLevel");
 	GameEngineCore::ChangeLevel("CityLevel");
