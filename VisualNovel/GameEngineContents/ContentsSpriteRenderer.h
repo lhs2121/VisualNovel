@@ -16,7 +16,6 @@ public:
 	ContentsSpriteRenderer& operator=(ContentsSpriteRenderer&& _Other) noexcept = delete;
 
 	void EnableOverlay();
-	void EnableOverlay(std::string _TextureName);
 	void DisableOverlay();
 
 	void EnableFlicker();
@@ -28,7 +27,7 @@ public:
 	void EnableTextureScrolling(float4 Dir);
 	void DisableTextureScrolling();
 
-	void SetOverlay(float Intensity, float4 OverlayUVPlus, float4 OverlayUVMul);
+	void SetOverlay(std::string _TextureName);
 	void SetFlicker(float _Max, float _Min, float _Speed);
 
 protected:
@@ -37,8 +36,8 @@ protected:
 	void Render(GameEngineCamera* _Camera, float _Delta) override;
 
 	OverlayInfo OverlayInfoValue;
-	float4 ShaderScrollingVector;
-	float4 SpriteScrollingVector;
+	float4 OverlayTexScrollVec;
+	float4 SpriteTexScrollVec;
 
 	float MaxIntensity = 4.5f;
 	float MinIntensity = 2.0f;

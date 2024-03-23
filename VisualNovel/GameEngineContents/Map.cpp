@@ -20,10 +20,42 @@ void Map::Start()
 		Dir.MoveParentToExistsChild("Assets");
 		Dir.MoveChild("Assets\\Map\\City\\001\\Back");
 
-		GameEngineSprite::CreateFolder("TestBack", Dir.GetStringPath());
+		std::shared_ptr<GameEngineSprite> Sprite = GameEngineSprite::CreateFolder("BackGroundLayers", Dir.GetStringPath());
+		int SpriteCount = Sprite->GetSpriteCount();
+
+		std::vector<float> ScrollSpeeds =
+		{
+			1.1f,
+			0.9f,
+			0.8f,
+			0.7f,
+			0.6f,
+			0.5f,
+			0.4f,
+			0.3f,
+			0.2f,
+			0.1f,
+		};
+
+		for (int i = 0; i < SpriteCount; i++)
+		{
+			std::shared_ptr<ContentsSpriteRenderer> Renderer = CreateComponent<ContentsSpriteRenderer>();
+			Renderer->SetSprite("BackGroundLayers", i);
+			Renderer->SetOverlay("Test0.png");
+			Renderer->SetFlicker(5.0f, 1.3f, 1.8f);
+			Renderer->SetRenderOrder(SpriteCount - i);
+
+			Renderer->EnableOverlay();
+			Renderer->EnableFlicker();
+
+			Renderer->EnableSpriteScrolling({ 0.1f * ScrollSpeeds[i], 0.0f });
+			Renderer->EnableTextureScrolling({ 0.1f * ScrollSpeeds[i], 0.0f });
+
+			BackRenderers.push_back(Renderer);
+		}
 	}
 
-	{
+	/*{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistsChild("Assets");
 		Dir.MoveChild("Assets\\Map\\City\\001\\Platform");
@@ -37,9 +69,9 @@ void Map::Start()
 		Dir.MoveChild("Assets\\Map\\City\\001\\Tile");
 
 		std::shared_ptr<GameEngineSprite> TileSet = GameEngineSprite::CreateFolder("Tile", Dir.GetStringPath());
-	}
+	}*/
 
-	{
+	/*{
 		BackRenderer = CreateComponent<ContentsSpriteRenderer>();
 		BackRenderer->SetRenderOrder(0);
 		BackRenderer->Transform.SetLocalPosition({ 0,0,350 });
@@ -70,9 +102,25 @@ void Map::Start()
 		TileMapRenderer->EnableOverlay("Test7.png");
 		TileMapRenderer->EnableFlicker();
 		TileMapRenderer->SetFlicker(7, 1, 3.5f);
-	}
+	}*/
 
 	GameEngineInput::AddInputObject(this);
+}
+
+void Map::Update(float _Delta)
+{
+	if (OverlayChange == false)
+	{
+		float4 CameraPos = GetLevel()->GetMainCamera()->Transform.GetWorldPosition();
+		if (CameraPos.Z <= -359.018433f)
+		{
+			for (std::shared_ptr<ContentsSpriteRenderer> Renderer : BackRenderers)
+			{
+				Renderer->SetOverlay("Test8.png");
+			}
+			OverlayChange = true;
+		}
+	}
 }
 
 void Map::LoadTileMapFromCSV(std::shared_ptr<ContentsTileMapRenderer> TileMapRenderer)
@@ -87,73 +135,26 @@ void Map::LoadTileMapFromCSV(std::shared_ptr<ContentsTileMapRenderer> TileMapRen
 	{
 		return;
 	}
-
 	std::string line;
-
 	int y = 0;
-
 	while (std::getline(file, line))
 	{
 		std::istringstream iss(line);
-
 		std::string line;
-
 		int x = 0;
-
 		while (std::getline(iss, line, ','))
 		{
-
 			std::string::size_type pos = line.find('_');
 
 			if (pos != std::string::npos && pos != line.size() - 1)
 			{
 				std::string spriteName = line.substr(0, pos);
-
 				int index = std::stoi(line.substr(pos + 1));
-
-
 				TileMapRenderer->SetTileIndex({ (ULONG)x, (ULONG)y, (UINT)index, spriteName });
 			}
 			++x;
 		}
 		++y;
 	}
-
 	file.close();
-}
-
-void Map::Update(float _Delta)
-{
-	if (InputIsDown('K'))
-	{
-		BackRenderer->DisableOverlay();
-	}
-	if (InputIsDown('L'))
-	{
-		BackRenderer->EnableOverlay();
-	}
-	if (InputIsDown('H'))
-	{
-		BackRenderer->EnableFlicker();
-	}
-	if (InputIsDown('J'))
-	{
-		BackRenderer->DisableFlicker();
-	}
-	if (InputIsPress('B'))
-	{
-		BackRenderer->EnableTextureScrolling({1,-2});
-	}
-	if (InputIsDown('N'))
-	{
-		BackRenderer->DisableTextureScrolling();
-	}
-	if (InputIsPress('Z'))
-	{
-		BackRenderer->EnableSpriteScrolling({ 0.5f,0 });
-	}
-	if (InputIsDown('X'))
-	{
-		BackRenderer->DisableSpriteScrolling();
-	}
 }

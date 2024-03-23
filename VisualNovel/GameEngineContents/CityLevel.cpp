@@ -17,16 +17,44 @@ void CityLevel::Start()
 
 	MainCamera = GetMainCamera();
 	MainCamera->SetProjectionType(EPROJECTIONTYPE::Perspective);
-	MainCamera->Transform.SetLocalPosition({ 0,0,-630 });
-	
+	MainCamera->Transform.SetLocalPosition({ 33.121792f,-180.763336f,0.0f });
+
 	GetLevelRenderTarget()->CreateEffect<FadePostEffect>();
-    GameEngineCore::GetBackBufferRenderTarget()->SetClearColor({ 1.0f, 0.078f, 0.576f });
+
+	GameEngineCore::GetBackBufferRenderTarget()->SetClearColor({ 1.0f, 0.078f, 0.576f });
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("Assets");
+		Dir.MoveChild("Assets\\Sound");
+
+
+		GameEngineSound::SoundLoad(Dir.PlusFilePath("TestSong.mp3"));
+		BGM = GameEngineSound::SoundPlay("TestSong.mp3");
+	}
+
 
 	GameEngineInput::AddInputObject(this);
-	
 }
 
 void CityLevel::Update(float _Delta)
+{
+	float4 CameraPos = MainCamera->Transform.GetWorldPosition();
+
+	if (CameraPos.Z >= -359.018433f)
+	{
+		MainCamera->Transform.AddLocalPosition({ 0,0,-13.0f * _Delta });
+	}
+
+	if (InputIsDown('P'))
+	{
+		BGM.TogglePausePlay();
+	}
+
+	//CameraInputUpdate(_Delta);
+}
+
+void CityLevel::CameraInputUpdate(float _Delta)
 {
 	if (InputIsPress('W'))
 	{

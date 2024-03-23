@@ -25,7 +25,26 @@ void GameEngineSoundPlayer::SetVolume(float _Volume)
 
 void GameEngineSoundPlayer::Stop()
 {
-	Control->stop();
+	Control->setPaused(true);
+	isPlaying = false;
+}
+
+void GameEngineSoundPlayer::Replay()
+{
+	Control->setPaused(false);
+	isPlaying = true;
+}
+
+void GameEngineSoundPlayer::TogglePausePlay()
+{
+	if (isPlaying)
+	{
+		Stop();
+	}
+	else
+	{
+		Replay();
+	}
 }
 
 

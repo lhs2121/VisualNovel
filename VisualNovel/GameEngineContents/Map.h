@@ -22,7 +22,9 @@ protected:
 	void Update(float _Delta) override;
 	void LoadTileMapFromCSV(std::shared_ptr<ContentsTileMapRenderer> TileMapRenderer);
 
+	bool OverlayChange = false;
 	std::shared_ptr<ContentsTileMapRenderer> TileMapRenderer;
+	std::vector<std::shared_ptr<ContentsSpriteRenderer>> BackRenderers;
 	std::shared_ptr<ContentsSpriteRenderer> BackRenderer;
 	std::shared_ptr<ContentsSpriteRenderer> ObjRenderer;
 };

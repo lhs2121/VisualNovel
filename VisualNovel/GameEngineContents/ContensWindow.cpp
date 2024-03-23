@@ -32,7 +32,14 @@ void TestTab::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 {
 	std::string MousePos = GameEngineCore::MainWindow.GetMousePos().ToString();
 
+	std::string CameraPos = _Level->GetMainCamera()->Transform.GetWorldPosition().ToString();
+
 	if (ImGui::Button(MousePos.c_str()))
+	{
+
+	}
+
+	if (ImGui::Button(CameraPos.c_str()))
 	{
 
 	}
