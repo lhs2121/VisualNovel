@@ -5,6 +5,7 @@
 void ContensWindow::Start()
 {
 	Tabs.push_back(std::make_shared<TestTab>("Test"));
+	Tabs.push_back(std::make_shared<LevelTab>("LevelTab"));
 }
 
 void ContensWindow::OnGUI(GameEngineLevel* _Level, float _Delta)
@@ -24,17 +25,23 @@ void ContensWindow::OnGUI(GameEngineLevel* _Level, float _Delta)
 	}
 }
 
-void ContensWindow::LevelChangeScreen(GameEngineLevel* _Level)
-{
-}
-
 void TestTab::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 {
 	std::string MousePos = GameEngineCore::MainWindow.GetMousePos().ToString();
 
 	std::string CameraPos = _Level->GetMainCamera()->Transform.GetWorldPosition().ToString();
 
+	if (ImGui::Button("MousePos"))
+	{
+
+	}
+
 	if (ImGui::Button(MousePos.c_str()))
+	{
+
+	}
+
+	if (ImGui::Button("CameraPos"))
 	{
 
 	}
@@ -92,4 +99,27 @@ void TestTab::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 
 		}
 	}
+}
+
+void LevelTab::OnGUI(GameEngineLevel* _Level, float _Delta)
+{
+	std::map<std::string, std::shared_ptr<GameEngineLevel>>& AllLevels = GameEngineCore::GetAllLevel();
+
+	for (std::pair<const std::string, std::shared_ptr<GameEngineLevel>> Pair : AllLevels)
+	{
+		if (ImGui::Button(Pair.first.c_str()))
+		{
+			GameEngineCore::ChangeLevel(Pair.first);
+		}
+	}
+
+	static const char* items[] = { "Item 1", "Item 2", "Item 3", "Item 4" };
+	static int currentItem = 0; // 현재 선택된 항목의 인덱스
+
+	// 리스트박스 생성
+	if (ImGui::ListBox("##listbox", &currentItem, items, IM_ARRAYSIZE(items))) 
+	{
+		// 리스트박스에서 항목을 선택했을 때 처리할 작업
+	}
+
 }

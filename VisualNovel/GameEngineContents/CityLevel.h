@@ -20,10 +20,8 @@ protected:
 	void Update(float _Delta) override;
 	void CameraInputUpdate(float _Delta);
 
-
 	float CameraSpeed = 350.0f;
 
-	GameEngineSoundPlayer BGM;
 	std::shared_ptr<class Map> LevelMap;
 	std::shared_ptr<GameEngineCamera> MainCamera;
 };

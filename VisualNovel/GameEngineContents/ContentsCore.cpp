@@ -10,6 +10,7 @@
 #include "ContensWindow.h"
 #include "TitleLevel.h"
 #include "CityLevel.h"
+#include "IntroLevel.h"
 
 ContentsCore::ContentsCore() 
 {
@@ -50,8 +51,8 @@ void ContentsCore::Start()
 	GameEngineGUI::CreateGUIWindow<ContensWindow>("ContensWindow");
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
 	GameEngineCore::CreateLevel<CityLevel>("CityLevel");
+	GameEngineCore::CreateLevel<IntroLevel>("IntroLevel");
 	GameEngineCore::ChangeLevel("CityLevel");
-	//¾È³ç
 }
 
 void ContentsCore::Update(float _Delta)

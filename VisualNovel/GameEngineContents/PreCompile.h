@@ -20,5 +20,6 @@
 // Contents
 #include <GameEngineCore/GameEngineTileMap.h>
 
+#include "ContentsSpriteRenderer.h"
 #include "ContentsEnum.h"
 #include "ContentsCore.h"
