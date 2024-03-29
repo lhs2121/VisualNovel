@@ -52,7 +52,7 @@ void ContentsCore::Start()
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
 	GameEngineCore::CreateLevel<CityLevel>("CityLevel");
 	GameEngineCore::CreateLevel<IntroLevel>("IntroLevel");
-	GameEngineCore::ChangeLevel("CityLevel");
+	GameEngineCore::ChangeLevel("IntroLevel");
 }
 
 void ContentsCore::Update(float _Delta)
