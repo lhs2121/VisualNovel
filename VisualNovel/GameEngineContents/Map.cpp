@@ -57,7 +57,7 @@ void Map::Start()
 		Dir.MoveChild("Assets\\Map\\City\\001\\Tile");
 
 		GameEngineTexture::Load(Dir.PlusFilePath("TileSet.png"));
-		std::shared_ptr<GameEngineSprite> ptr = GameEngineSprite::CreateCut("Tile", "TileSet.png", 9, 2);
+		std::shared_ptr<GameEngineSprite> ptr = GameEngineSprite::CreateCut("Tile", "TileSet.png", 8, 2);
 
 		TileMapRenderer = CreateComponent<ContentsTileMapRenderer>();
 		TileMapRenderer->CreateTileMap({ 100,100,{32,32},"Tile" });
