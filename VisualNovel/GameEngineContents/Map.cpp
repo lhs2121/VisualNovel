@@ -15,59 +15,60 @@ Map::~Map()
 
 void Map::Start()
 {
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistsChild("Assets");
-		Dir.MoveChild("Assets\\Map\\City\\001\\Back");
+	//{
+	//	GameEngineDirectory Dir;
+	//	Dir.MoveParentToExistsChild("Assets");
+	//	Dir.MoveChild("Assets\\Map\\City\\001\\Back");
 
-		GameEngineSprite::CreateFolder("TestBack", Dir.GetStringPath());
+	//	GameEngineSprite::CreateFolder("TestBack", Dir.GetStringPath());
 
-		BackRenderer = CreateComponent<ContentsSpriteRenderer>();
-		BackRenderer->SetRenderOrder(0);
-		BackRenderer->Transform.SetLocalPosition({ 0,0,350 });
+	//	BackRenderer = CreateComponent<ContentsSpriteRenderer>();
+	//	BackRenderer->SetRenderOrder(0);
+	//	BackRenderer->Transform.SetLocalPosition({ 0,0,350 });
 
-		BackRenderer->SetSprite("TestBack");
-		BackRenderer->SetOverlay("Test2.png");
-		BackRenderer->EnableOverlay();
-		BackRenderer->EnableFlicker();
-		BackRenderer->SetFlicker(7, 0.5f, 10.0f);
-	}
+	//	BackRenderer->SetSprite("TestBack");
+	//	BackRenderer->SetOverlay("Test2.png");
+	//	BackRenderer->EnableOverlay();
+	//	BackRenderer->EnableFlicker();
+	//	BackRenderer->SetFlicker(7, 0.5f, 10.0f);
+	//}
 
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistsChild("Assets");
-		Dir.MoveChild("Assets\\Map\\City\\001\\Platform");
+	//{
+	//	GameEngineDirectory Dir;
+	//	Dir.MoveParentToExistsChild("Assets");
+	//	Dir.MoveChild("Assets\\Map\\City\\001\\Platform");
 
-		GameEngineSprite::CreateFolder("TestObj", Dir.GetStringPath());
+	//	GameEngineSprite::CreateFolder("TestObj", Dir.GetStringPath());
 
-		ObjRenderer = CreateComponent<ContentsSpriteRenderer>();
-		ObjRenderer->SetRenderOrder(1);
-		ObjRenderer->Transform.SetLocalPosition({ 0,100,150 });
+	//	ObjRenderer = CreateComponent<ContentsSpriteRenderer>();
+	//	ObjRenderer->SetRenderOrder(1);
+	//	ObjRenderer->Transform.SetLocalPosition({ 0,100,150 });
 
-		ObjRenderer->SetSprite("TestObj");
-		ObjRenderer->SetOverlay("Test2.png");
-		ObjRenderer->EnableOverlay();
-		ObjRenderer->EnableFlicker();
-		ObjRenderer->SetFlicker(5, 1, 5.0f);
-	}
+	//	ObjRenderer->SetSprite("TestObj");
+	//	ObjRenderer->SetOverlay("Test2.png");
+	//	ObjRenderer->EnableOverlay();
+	//	ObjRenderer->EnableFlicker();
+	//	ObjRenderer->SetFlicker(5, 1, 5.0f);
+	//}
 
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistsChild("Assets");
 		Dir.MoveChild("Assets\\Map\\City\\001\\Tile");
 
-		GameEngineSprite::CreateFolder("Tile", Dir.GetStringPath());
+		GameEngineTexture::Load(Dir.PlusFilePath("TileSet.png"));
+		std::shared_ptr<GameEngineSprite> ptr = GameEngineSprite::CreateCut("Tile", "TileSet.png", 9, 2);
 
 		TileMapRenderer = CreateComponent<ContentsTileMapRenderer>();
 		TileMapRenderer->CreateTileMap({ 100,100,{32,32},"Tile" });
 		LoadTileMapFromCSV(TileMapRenderer);
 
 		TileMapRenderer->SetRenderOrder(2);
-		TileMapRenderer->SetOverlay("Test7.png");
-		TileMapRenderer->SetFlicker(7, 5, 3.5f);
+		//TileMapRenderer->SetOverlay("Test7.png");
+		//TileMapRenderer->SetFlicker(7, 5, 3.5f);
 
-		TileMapRenderer->EnableOverlay();
-		TileMapRenderer->EnableFlicker();
+		//TileMapRenderer->EnableOverlay();
+		//TileMapRenderer->EnableFlicker();
 	}
 
 	GameEngineInput::AddInputObject(this);

@@ -46,10 +46,10 @@ public:
 		return NewRes;
 	}
 
-	static std::shared_ptr<GameEngineSprite> CreateCut(std::string_view _Name, unsigned int _X, unsigned int _Y)
+	static std::shared_ptr<GameEngineSprite> CreateCut(std::string_view _SpriteName, std::string_view _TextureName, unsigned int _X, unsigned int _Y)
 	{
-		std::shared_ptr<GameEngineSprite> NewRes = CreateRes(_Name);
-		NewRes->ResCreateCut(_Name, _X, _Y);
+		std::shared_ptr<GameEngineSprite> NewRes = CreateRes(_SpriteName);
+		NewRes->ResCreateCut(_TextureName, _X, _Y);
 		return NewRes;
 	}
 
